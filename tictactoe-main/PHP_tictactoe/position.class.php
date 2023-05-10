@@ -23,6 +23,10 @@ class Position
     public function setPosition($input, $player, $board)
     {
 
+        if (!is_numeric($input)) {
+            return;
+        }
+
         $this->column = $input % $this->height;
         $this->column == 0 ? $this->column = $this->height - 1 : $this->column -= 1;
 
@@ -30,11 +34,11 @@ class Position
 
         $this->colrow = [ceil($this->row) - 1 => $this->column];
 
-        
+
 
         foreach ($this->colrow as $col => $row) {
             if ($this->a == 0) {
-                $board->Play($col, $row, $player->team, $board->tries, $player);
+                $board->Play($col, $row, $player->team, $player, $input);
             } else {
                 $this->a = 0;
                 $player->switchTeam();

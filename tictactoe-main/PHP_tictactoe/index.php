@@ -37,7 +37,10 @@ function game()
 
         if ($input > $gameboard->height * $gameboard->width || $input < 1) {
             echo "Invalid position bro \n";
-            $i += 1;
+            $i -= 1;
+        }
+        if (!is_numeric($input)) {
+            $player->switchTeam();
         }
 
         $position->setPosition($input, $player, $gameboard);

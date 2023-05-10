@@ -57,13 +57,25 @@ class Gameboard{
 
     public $tries = 0;
 
-    public function Play (int $roww, int $column, $vakje, $tries, $player)
+    public function Play (int $roww, int $column, $vakje, $player, $input)
     {
+        if ($input < 1) {
+            $this->tries -= 1;
+            $player->switchTeam();
+            return;
+        }
+
+
+        if ($input > $this->height * $this->width) {
+            $this->tries -= 1;
+            $player->switchTeam();
+            return;
+        }
         if ($this->board[$roww][$column] == Vakje::empty) {
             $this->board[$roww][$column] = $vakje;
 
         } else {
-            $this->tries += 1;
+            $this->tries -= 1;
             $player->switchTeam();
         }
     }
